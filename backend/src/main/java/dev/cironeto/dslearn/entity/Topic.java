@@ -3,9 +3,7 @@ package dev.cironeto.dslearn.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_topic")
@@ -40,6 +38,14 @@ public class Topic implements Serializable {
             joinColumns = @JoinColumn(name = "topic_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> likes = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "reply_id")
+    private Reply answer;
+
+    @OneToMany(mappedBy = "topic")
+    private List<Reply> replies = new ArrayList<>();
+
 
     public Topic() {
     }
@@ -112,6 +118,18 @@ public class Topic implements Serializable {
 
     public Set<User> getLikes() {
         return likes;
+    }
+
+    public Reply getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Reply answer) {
+        this.answer = answer;
+    }
+
+    public List<Reply> getReplies() {
+        return replies;
     }
 
     @Override
