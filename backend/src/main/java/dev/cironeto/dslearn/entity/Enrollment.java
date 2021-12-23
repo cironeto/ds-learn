@@ -30,7 +30,7 @@ public class Enrollment implements Serializable {
     private Set<Lesson> lessonsDone = new HashSet<>();
 
     @OneToMany(mappedBy = "enrollment")
-    private List<Deliver> delivers = new ArrayList<>();
+    private List<Deliver> deliveries = new ArrayList<>();
 
 
     public Enrollment() {
@@ -93,7 +93,7 @@ public class Enrollment implements Serializable {
         this.onlyUpdate = onlyUpdate;
     }
 
-    public List<Deliver> getDelivers() {
-        return delivers;
+    public List<Deliver> getDeliveries() {
+        return deliveries;
     }
 }
